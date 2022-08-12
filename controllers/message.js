@@ -1,6 +1,6 @@
 const express=require('express');
 const Message=require('../models/message')
-// const Group=require('../models/group')
+const Group=require('../models/group')
 
 exports.addMessage = (req, res, next)=>{
 
@@ -8,11 +8,14 @@ exports.addMessage = (req, res, next)=>{
     //onsole.log(groupId)
     const msg=req.body.msg
     //console.log(req.user.name, msg)
+    
 
     req.user.createMessage({
         msg:msg,
         name:req.user.name,
-        gId:groupId
+        gId:groupId,
+        userId:req.user.id      
+        
 
     }).then(result=>{
        res.status(200).json({result})
